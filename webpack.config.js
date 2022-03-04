@@ -8,12 +8,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
-const buildDefault = [
-  //javascript書き出し
-  {
+const buildDefault = {
     mode: 'production', //開発バージョンで出力
     devtool: 'inline-source-map',
-    entry: './src/js/index.js',
+    entry: ['./src/js/index.js','./src/stylus/style.styl'],
     watchOptions: {
       ignored: /node_modules/
     },
@@ -46,31 +44,7 @@ const buildDefault = [
               }
             }
           ]
-        }
-      ]
-    },
-    //プラグインの設定
-    plugins: [
-      new BrowserSyncPlugin({
-        host: 'localhost',
-        port: 2000,
-        server: { baseDir: 'dist' }
-      })
-    ],
-  },
-  //CSS書き出し
-  {
-    mode: 'production',
-    devtool: "source-map",
-    entry: {
-      style: './src/stylus/style.styl',
-    },
-    output: {
-      path: `${__dirname}/dist/css`,
-      // filename: '[name].css'
-    },
-    module: {
-      rules: [
+        },
         {
           test: /\.styl$/,
           use: [
@@ -79,6 +53,7 @@ const buildDefault = [
             {
               loader: 'postcss-loader',
               options: {
+                // publicPath: 'src/stylus/style.styl',
                 postcssOptions: {
                   plugins: [
                     [
@@ -100,24 +75,31 @@ const buildDefault = [
         }
       ]
     },
+    //プラグインの設定
     plugins: [
-      new MiniCssExtractPlugin({filename:'[name].css'}),
-    ]
+      //ファイル変更でブラウザリロード
+      new BrowserSyncPlugin({
+        host: 'localhost',
+        port: 2000,
+        server: { baseDir: 'dist' }
+      }),
+      new MiniCssExtractPlugin({
+        filename: '../css/style.css'
+      }),
+    ],
   }
-];
 
-
-
+// buildDefault のプラグイン配列にpug変換を追加
 const pugFiles = globule.find('src/pug/**/*.pug', {
   ignore: [ 'src/pug/**/_*.pug' ]
 });
 
 pugFiles.forEach((pug) => {
   const fileName = pug.replace('src/pug/', '').replace('.pug', '.html')
-  buildDefault[0].plugins.push(
+  buildDefault.plugins.push(
     new HtmlWebpackPlugin({
-      filename: `${__dirname}/dist/${fileName}`,
       template: pug,
+      filename: `${__dirname}/dist/${fileName}`,
       inject: true,
       minify: true,
     })
