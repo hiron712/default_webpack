@@ -6,6 +6,8 @@ const cssnano = require("cssnano");
 const autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+
 const buildDefault = [
   //javascript書き出し
   {
@@ -45,7 +47,13 @@ const buildDefault = [
       ]
     },
     //プラグインの設定
-    plugins: [],
+    plugins: [
+      new BrowserSyncPlugin({
+        host: 'localhost',
+        port: 2000,
+        server: { baseDir: 'dist' }
+      })
+    ],
   },
   //CSS書き出し
   {
