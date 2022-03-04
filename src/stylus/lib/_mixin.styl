@@ -1,0 +1,98 @@
+px2rem(px = 16)
+  font-size (px/16)rem
+
+px2remi(px = 16)
+  font-size (px/16)rem !important
+
+px(px = 16)
+  font-size (px/16)rem
+
+pxi(px = 16)
+  font-size (px/16)rem !important
+
+transition(time = 500ms)
+  -webkit-transition: all time cubic-bezier(0.165, 0.84, 0.44, 1)
+  -moz-transition: all time cubic-bezier(0.165, 0.84, 0.44, 1)
+  -o-transition: all time cubic-bezier(0.165, 0.84, 0.44, 1)
+  transition: all time cubic-bezier(0.165, 0.84, 0.44, 1)
+
+sp(break_point = 800)//640
+  @media only screen and (max-width : (break_point)px)
+    {block}
+
+tb(break_point = 801,break_point_max = 970)
+  @media only screen and (min-width : (break_point)px) and (max-width : (break_point_max)px)
+    {block}
+
+txt-border(col = #000000 , p = 1)
+  text-shadow col (p)px (p)px 1px, col (p*-1)px (p)px 1px, col (p)px (p*-1)px 1px, col (p*-1)px (p*-1)px 1px, col (p*-1)px 0 1px, col (p)px 0 1px, col 0 (p*-1)px 1px, col 0 (p)px 1px;
+
+mincho()
+  font-family "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", "YuMincho", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", "serif";
+
+notosans()
+  font-family: 'Noto Sans JP', sans-serif;
+
+clearfix()
+  &:after
+    content ""
+    display table
+    clear both
+bold()
+  font-weight bold
+
+//リストのスタイルリセット
+list-style-none()
+  list-style none
+  margin 0
+  padding 0
+  li
+    list-style none
+    margin 0
+    padding 0
+
+mp0()
+  margin 0
+  padding 0
+
+smooth()
+  overflow-x hidden
+  overflow-y auto
+  -webkit-overflow-scrolling touch
+
+vertical-rl()
+  writing-mode: vertical-rl;
+
+inline-block()
+  display inline-block
+  vertical-align middle
+
+outline-shabow()
+  outline none
+  &:focus
+    box-shadow 1px 1px 5px #0066FFCC,-1px -1px 5px #0066FFCC,1px -1px 5px #0066FFCC,-1px 1px 5px #0066FFCC
+
+
+gradient(fromColor = #000000, toColor = #ffffff)
+  background-color toColor
+  background-image linear-gradient(to bottom, fromColor, toColor)
+
+text-gradient(fromColor = #000000, toColor = #ffffff)
+  color toColor
+  background linear-gradient(to bottom, fromColor, toColor);
+  background-clip text
+  -webkit-text-fill-color transparent
+
+
+keyframes(nam)
+  @-webkit-keyframes nam
+    {block}
+
+  @-moz-keyframes nam
+    {block}
+
+  @-ms-keyframes nam
+    {block}
+
+  @keyframes nam
+    {block}

@@ -19,7 +19,10 @@ const buildDefault = [
     },
     output: {
       path: __dirname + '/dist/js/',
-      filename: 'sample.js'
+      filename: 'app.js'
+    },
+    stats: {
+      children: true,
     },
     module: {
       rules: [
@@ -115,7 +118,7 @@ pugFiles.forEach((pug) => {
     new HtmlWebpackPlugin({
       filename: `${__dirname}/dist/${fileName}`,
       template: pug,
-      inject: false,
+      inject: true,
       minify: true,
     })
   )
