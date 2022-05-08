@@ -8,6 +8,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
+const CopyPlugin = require("copy-webpack-plugin");
+const WriteFilePlugin = require("write-file-webpack-plugin");
+
 const buildDefault = {
     mode: 'production', //開発バージョンで出力
     devtool: 'inline-source-map',
@@ -86,6 +89,15 @@ const buildDefault = {
       new MiniCssExtractPlugin({
         filename: '../css/style.css'
       }),
+      // new CopyPlugin({
+      //   patterns: [
+      //     {
+      //       from: "./src/img",
+      //       to: "./dist/img"
+      //     },
+      //   ],
+      // }),
+      new WriteFilePlugin()
     ],
   }
 
